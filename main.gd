@@ -6,10 +6,18 @@ var score = 0
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
 
 func new_game():
 	score = 0
+	for child in get_children():
+		if child.is_in_group("mobs"):
+			child.queue_free()
+	for bullet in get_tree().get_nodes_in_group("bullets"):
+		bullet.queue_free()
 	$Player.start($StartPosition.position)
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready")
 	$StartTimer.start()
 
 func _ready() -> void:
@@ -49,3 +57,7 @@ func _on_mob_timer_timeout() -> void:
 	mob.linear_velocity = velocity.rotated(mob.rotation)
 	mob.add_to_group("mobs")
 	add_child(mob)
+
+func add_score_for_kill() -> void:
+	score += 1
+	$HUD.update_score(score)

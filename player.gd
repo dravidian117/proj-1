@@ -13,10 +13,13 @@ var facing := Vector2.RIGHT
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	if bullet_scene == null:
-		bullet_scene = load("res://bullet.tscn")
+		bullet_scene = preload("res://bullet.tscn")
 	hide()
 
 func _process(delta: float) -> void:
+	if not visible:
+		return
+
 	shoot_timer = max(0.0, shoot_timer - delta)
 
 	var velocity = Vector2.ZERO
@@ -52,14 +55,16 @@ func _process(delta: float) -> void:
 
 func shoot() -> void:
 	if bullet_scene == null:
+		bullet_scene = preload("res://bullet.tscn")
+	if bullet_scene == null:
 		return
 
 	var bullet = bullet_scene.instantiate()
-	bullet.position = position
+	get_parent().add_child(bullet)
+	bullet.global_position = global_position + facing.normalized() * 20.0
 	bullet.direction = facing.normalized()
 	if bullet.direction.length() == 0:
 		bullet.direction = Vector2.RIGHT
-	get_parent().add_child(bullet)
 	shoot_timer = fire_cooldown
 
 func _on_body_entered(_body):
