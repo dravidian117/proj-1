@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c0giwgiad17nw"]
+
+[ext_resource type="PackedScene" uid="uid://b08skd1qug1d2" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" path="res://HUD.tscn" id="2_1x0n2"]
+[ext_resource type="Script" uid="uid://xhc7a4qntfhq" path="res://main.gd" id="5_27v7k"]
+
+[sub_resource type="Curve2D" id="Curve2D_1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node" unique_id=1662958505]
+script = ExtResource("5_27v7k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=431754434]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Player" parent="." unique_id=875605389 instance=ExtResource("1_ig7tw")]
+
+[node name="MobPath" type="Path2D" parent="." unique_id=1603963240]
+curve = SubResource("Curve2D_1")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1426011606]
+
+[node name="MobTimer" type="Timer" parent="." unique_id=1723956692]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="." unique_id=1795817683]
+
+[node name="StartTimer" type="Timer" parent="." unique_id=354189240]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="." unique_id=1576181118]
+position = Vector2(240, 360)
+
+[node name="HUD" parent="." unique_id=1488693283 instance=ExtResource("2_1x0n2")]
