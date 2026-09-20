@@ -49,8 +49,8 @@ radius = 24.999998
 height = 70.0
 
 [node name="RigidBody2D" type="RigidBody2D" unique_id=116354988]
-collision_layer = 1
-collision_mask = 1
+collision_layer = 2
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_ejbti")
 metadata/_edit_group_ = true

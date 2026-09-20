@@ -7,8 +7,8 @@ func _ready() -> void:
     add_to_group("bullets")
     monitoring = true
     monitorable = true
-    collision_layer = 1
-    collision_mask = 1
+    collision_layer = 4
+    collision_mask = 2
     $VisibleOnScreenNotifier2D.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited)
     body_entered.connect(_on_body_entered)
     area_entered.connect(_on_area_entered)
